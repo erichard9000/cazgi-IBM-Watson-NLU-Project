@@ -73,17 +73,19 @@ return res.send("Could not do desired operation "+err);
      });
 
 //The endpoint for the webserver ending with /url/sentiment
+app.get("/",(req,res)=>{
+    console.log( "index.html");
+    res.render('index.html');
+  });
+
+app.get("/url/emotion", (req,res) => {
+    console.log( "/url/emotion");
+    return res.send({"happy":"90","sad":"10"});
+});
+
 app.get("/url/sentiment", (req,res) => {
+    console.log( "/url/sentiment");
     return res.send("url sentiment for "+req.query.url);
-});
-
-//The endpoint for the webserver ending with /text/emotion
-app.get("/text/emotion", (req,res) => {
-    return res.send({"happy":"10","sad":"90"});
-});
-
-app.get("/text/sentiment", (req,res) => {
-    return res.send("text sentiment for "+req.query.text);
 });
 
 let server = app.listen(8080, () => {
