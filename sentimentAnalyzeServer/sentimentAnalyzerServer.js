@@ -58,20 +58,19 @@ app.get("/url/emotion", (req,res) => {
      }
           }
                }
+const naturalLanguageUnderstanding = getNLUInstance();
      
-    //  const naturalLanguageUnderstanding = getNLUInstance();
-     
-    //  naturalLanguageUnderstanding.analyze(analyzeParams)
-    //  .then(analysisResults => {
+naturalLanguageUnderstanding.analyze(analyzeParams)
+.then(analysisResults => {
     //     //Print the JSON returned by NLU instance as a formatted string
-    //     console.log(JSON.stringify(analysisResults.result.keywords[0].emotion,null,2));
+console.log(JSON.stringify(analysisResults.result.keywords[0].emotion,null,2));
     //     //Please refer to the image to see the order of retrieval
-    //     return res.send(analysisResults.result.keywords[0].emotion,null,2);
-    //  })
-    //  .catch(err => {
-    //  return res.send("Could not do desired operation "+err);
-    //  });
-});
+return res.send(analysisResults.result.keywords[0].emotion,null,2);
+    })
+.catch(err => {
+return res.send("Could not do desired operation "+err);
+  });
+     });
 
 //The endpoint for the webserver ending with /url/sentiment
 app.get("/url/sentiment", (req,res) => {
