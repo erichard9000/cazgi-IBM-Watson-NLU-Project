@@ -64,12 +64,10 @@ app.get("/text/emotion", (req,res) => {
         'features': {
             'entities': {
                 'emotion': true,
-                //'sentiment': true,
                 'limit': 2,
             },
             'keywords': {
                 'emotion': true,
-                //'sentiment': true,
                 'limit': 2,
             },
         },
@@ -78,13 +76,12 @@ app.get("/text/emotion", (req,res) => {
         .then(analysisResults => {
             console.log(JSON.stringify(analysisResults.result.keywords[0].emotion, null, 3));
             ret = JSON.stringify(analysisResults.result.keywords[0].emotion, null, 3);
-            return res.send("text sentiment for "+req.query.text + ret);
-      //return res.send("text sentiment for "+req.query.text);
+      return res.send("text sentiment for "+req.query.text);
         })
         .catch(err => {
             console.log('error:', err);
         });
-    //return res.send({"happy":"10","sad":"90"});
+    return res.send({"happy":"10","sad":"90"});
 });
 
 app.get("/text/sentiment", (req,res) => {
@@ -95,13 +92,11 @@ app.get("/text/sentiment", (req,res) => {
         'text': req.query.text,
         'features': {
             'entities': {
-               // 'emotion': true,
                 'sentiment': true,
                 'limit': 2,
             },
             'keywords': {
-               // 'emotion': true,
-                'sentiment': true,
+               'sentiment': true,
                 'limit': 2,
             },
         },
@@ -109,15 +104,14 @@ app.get("/text/sentiment", (req,res) => {
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
             console.log(JSON.stringify(analysisResults.result.keywords[0].sentiment, null, 3));
-            ret = JSON.stringify(analysisResults.result.keywords[0].sentiment, null, 3);
-            return res.send("text sentiment for "+req.query.text + ret);
-      //return res.send("text sentiment for "+req.query.text);
+            ret = JSON.stringify(analysisResults.result.keywords[0].sentiment, null, 3)
+              return res.send("text sentiment for "+req.query.text);
         })
         .catch(err => {
             console.log('error:', err);
         });
 
-    //return res.send("text sentiment for "+req.query.text);
+    
 });
 
 let server = app.listen(8080, () => {
