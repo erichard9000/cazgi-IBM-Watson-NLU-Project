@@ -21,3 +21,11 @@ class EmotionTable extends React.Component {
     
 }
 export default EmotionTable;
+Object.entries(this.props.emotions).map(function(mapentry) {
+    return (
+        <tr>
+        <td>{mapentry[0]}</td>
+        <td>{mapentry[1]}</td>
+        </tr>
+    )
+    })
